@@ -45,16 +45,16 @@ public class Policy {
         return premium;
     }
 
-    public List<PolicySubObject> getSubObjects() {
+    public PolicySubObject[] getSubObjects() {
         List<PolicySubObject> subObjects = new ArrayList<>();
         for (PolicyObject policyObject : this.getObjects()) {
             subObjects.addAll(Arrays.asList(policyObject.getSubObjects()));
         }
 
-        return subObjects;
+        return subObjects.toArray(new PolicySubObject[]{});
     }
 
-    public List<Risk> getDistinctPolicyRisks() {
+    public Risk[] getDistinctPolicyRisks() {
         List<Risk> risks = new ArrayList<>();
         List<Class> risksNames = new ArrayList<>();
         for (PolicySubObject policySubObject : this.getSubObjects()) {
@@ -66,6 +66,6 @@ public class Policy {
             }
         }
 
-        return risks;
+        return risks.toArray(new Risk[]{});
     }
 }
