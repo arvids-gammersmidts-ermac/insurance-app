@@ -2,6 +2,7 @@ import DomainModel.Money;
 import DomainModel.Policy.Calculator.PremiumCalculator;
 import DomainModel.Policy.Calculator.Strategy.DefaultPremiumCalculatorStrategy;
 import DomainModel.Policy.Policy;
+import DomainModel.Policy.PolicyNumber;
 import DomainModel.Policy.PolicyObject;
 import DomainModel.Policy.PolicySubObject;
 import DomainModel.Policy.Risks.FireRisk;
@@ -30,6 +31,6 @@ public class Main {
                         new PolicySubObject("Third sub object", new Money(new BigDecimal(55.05)), new Risk[]{new WaterRisk()}),
                 })
         };
-        return new Policy("LV19-07-100000-1", "APPROVED", policyObjects);
+        return new Policy(new PolicyNumber("LV19-07-100000-1"), policyObjects);
     }
 }

@@ -3,30 +3,37 @@ package DomainModel.Policy;
 import DomainModel.Money;
 import DomainModel.Policy.Risks.Risk;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 public class Policy {
-    private String number;
-    private String status;
+    private PolicyNumber number;
+    private enum Statuses {
+        APPROVED,
+        REGISTERED
+    }
+    private Statuses status = Statuses.REGISTERED;
     private PolicyObject[] objects;
     private Money premium;
 
-    public Policy(String number, String status, PolicyObject[] objects) {
+    public Policy(PolicyNumber number, PolicyObject[] objects) {
         this.number = number;
-        this.status = status;
         this.objects = objects;
     }
 
-    public String getNumber() {
+    public PolicyNumber getNumber() {
         return number;
     }
 
-    public String getStatus() {
+    public Statuses getStatus() {
         return status;
+    }
+
+    public Policy approve()
+    {
+        this.status = Statuses.APPROVED;
+        return this;
     }
 
     public PolicyObject[] getObjects() {

@@ -3,29 +3,22 @@ package DomainModel.Policy;
 import DomainModel.Money;
 
 public class PolicyBuilder {
-    private String number;
-    private String status;
+    private PolicyNumber number;
     private PolicyObject[] policyObjects;
     private Money premium;
     private final PolicyObjectBuilder policyObjectBuilder = new PolicyObjectBuilder();
 
     public PolicyBuilder() {
-        this.number = "LV19-07-100000-1";
-        this.status = "APPROVED";
+        this.number = new PolicyNumber("LV19-07-100000-1");
         this.policyObjects = BuildPolicyObjects();
     }
 
     public Policy Build() {
-        return new Policy(this.number, this.status, this.policyObjects);
+        return new Policy(this.number, this.policyObjects);
     }
 
-    public PolicyBuilder withNumber(String number) {
+    public PolicyBuilder withNumber(PolicyNumber number) {
         this.number = number;
-        return this;
-    }
-
-    public PolicyBuilder withStatus(String status) {
-        this.status = status;
         return this;
     }
 
@@ -40,19 +33,4 @@ public class PolicyBuilder {
                 this.policyObjectBuilder.BuildHouse(),
         };
     }
-
-//    private PolicyObject[] BuildPolicyObjects()
-//    {
-//        return new PolicyObject[]{
-//                new PolicyObject("Flat", new PolicySubObject[]{
-//                        new PolicySubObject("TV sub object",  new Money(new BigDecimal(109.00)), new String[]{PolicySubObject.RISK_TYPE_WATER}),
-//                        new PolicySubObject("Painting sub object", new Money(new BigDecimal(10.01)), new String[]{PolicySubObject.RISK_TYPE_FIRE, PolicySubObject.RISK_TYPE_WATER}),
-//                }),
-//                new PolicyObject("House", new PolicySubObject[]{
-//                        new PolicySubObject("First sub object", new Money(new BigDecimal(1.00)), new String[]{PolicySubObject.RISK_TYPE_FIRE, PolicySubObject.RISK_TYPE_WATER}),
-//                        new PolicySubObject("Second sub object", new Money(new BigDecimal(20.10)), new String[]{PolicySubObject.RISK_TYPE_FIRE}),
-//                        new PolicySubObject("Third sub object", new Money(new BigDecimal(55.05)), new String[]{PolicySubObject.RISK_TYPE_WATER}),
-//                })
-//        };
-//    }
 }
