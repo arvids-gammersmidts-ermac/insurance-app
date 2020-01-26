@@ -1,36 +1,39 @@
 package DomainModel.Policy;
 
 import DomainModel.Money;
+import DomainModel.Policy.Risks.FireRisk;
+import DomainModel.Policy.Risks.Risk;
+import DomainModel.Policy.Risks.WaterRisk;
 
 import java.math.BigDecimal;
 
 public class PolicySubObjectBuilder {
     private String name;
     private Money sum;
-    private String[] riskTypes;
+    private Risk[] risks;
 
     public PolicySubObjectBuilder() {
         this.name = "PolicySubObject";
         this.sum = new Money(new BigDecimal(10.00));
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_FIRE, PolicySubObject.RISK_TYPE_WATER};
+        this.risks = new Risk[]{new FireRisk(), new WaterRisk()};
     }
 
     public PolicySubObject Build() {
-        return new PolicySubObject(this.name, this.sum, this.riskTypes);
+        return new PolicySubObject(this.name, this.sum, this.risks);
     }
 
     public PolicySubObject BuildTV() {
         this.name = "TV";
         this.sum = new Money(new BigDecimal(110.00));
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_FIRE, PolicySubObject.RISK_TYPE_WATER};
-        return new PolicySubObject(this.name, this.sum, this.riskTypes);
+        this.risks = new Risk[]{new FireRisk(), new WaterRisk()};
+        return new PolicySubObject(this.name, this.sum, this.risks);
     }
 
     public PolicySubObject BuildPainting() {
         this.name = "Painting";
         this.sum = new Money(new BigDecimal(1001.11));
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_FIRE};
-        return new PolicySubObject(this.name, this.sum, this.riskTypes);
+        this.risks = new Risk[]{new FireRisk()};
+        return new PolicySubObject(this.name, this.sum, this.risks);
     }
 
     public PolicySubObjectBuilder withName(String name) {
@@ -43,18 +46,18 @@ public class PolicySubObjectBuilder {
         return this;
     }
 
-    public PolicySubObjectBuilder withBothRisks() {
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_FIRE, PolicySubObject.RISK_TYPE_WATER};
+    public PolicySubObjectBuilder withFireAndWaterRisks() {
+        this.risks = new Risk[]{new FireRisk(), new WaterRisk()};
         return this;
     }
 
     public PolicySubObjectBuilder withFireRisk() {
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_FIRE};
+        this.risks = new Risk[]{new FireRisk()};
         return this;
     }
 
     public PolicySubObjectBuilder withWaterRisk() {
-        this.riskTypes = new String[]{PolicySubObject.RISK_TYPE_WATER};
+        this.risks = new Risk[]{new WaterRisk()};
         return this;
     }
 }

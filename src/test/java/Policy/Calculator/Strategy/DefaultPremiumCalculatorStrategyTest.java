@@ -227,12 +227,12 @@ public class DefaultPremiumCalculatorStrategyTest {
                         },
                         2.30,
                 },
-                // BOTH
+                // FIRE AND WATER
                 {
                         "SingleObjectSingleSubObjectBothRisks",
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(99.99))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(99.99))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         6.30,
@@ -241,8 +241,8 @@ public class DefaultPremiumCalculatorStrategyTest {
                         "SingleObjectMultipleSubObjectBothRisks",
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(49.89))).withBothRisks().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(50.10))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(49.89))).withFireAndWaterRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(50.10))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         6.30,
@@ -251,12 +251,12 @@ public class DefaultPremiumCalculatorStrategyTest {
                         "MultipleObjectsMultipleSubObjectBelowBothLimitPolicy",
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(24.99))).withBothRisks().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(25.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(24.99))).withFireAndWaterRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(25.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(20.00))).withBothRisks().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(30.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(20.00))).withFireAndWaterRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(30.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         6.30,
@@ -267,7 +267,7 @@ public class DefaultPremiumCalculatorStrategyTest {
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
                                         new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(100.00))).withFireRisk().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(10.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(10.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         3.03,
@@ -286,7 +286,7 @@ public class DefaultPremiumCalculatorStrategyTest {
                         "SingleObjectMultipleSubObjectMWaterBothRisks",
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(49.89))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(49.89))).withFireAndWaterRisks().Build(),
                                         new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(50.10))).withWaterRisk().Build(),
                                 }).Build(),
                         },
@@ -297,11 +297,11 @@ public class DefaultPremiumCalculatorStrategyTest {
                         new PolicyObject[]{
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
                                         new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(10.00))).withWaterRisk().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(25.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(25.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
                                         new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(100.01))).withFireRisk().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(30.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(30.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         6.82,
@@ -313,7 +313,7 @@ public class DefaultPremiumCalculatorStrategyTest {
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{}).Build(),
                                 new PolicyObjectBuilder().withPolicySubObjects(new PolicySubObject[]{
                                         new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(100.01))).withFireRisk().Build(),
-                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(100.00))).withBothRisks().Build(),
+                                        new PolicySubObjectBuilder().withSum(new Money(new BigDecimal(100.00))).withFireAndWaterRisks().Build(),
                                 }).Build(),
                         },
                         9.60,

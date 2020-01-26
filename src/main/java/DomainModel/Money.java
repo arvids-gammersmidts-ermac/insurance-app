@@ -5,73 +5,81 @@ import java.io.Serializable;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.math.BigDecimal;
+
 import static java.math.BigDecimal.ZERO;
+
 import java.math.RoundingMode;
 
 public final class Money implements Comparable<Money>, Serializable {
     public static final class MismatchedCurrencyException extends RuntimeException {
-        MismatchedCurrencyException(String message){
+        MismatchedCurrencyException(String message) {
             super(message);
         }
     }
 
-    public Money(BigDecimal amount, Currency currency, RoundingMode roundingStyle){
+    public Money(BigDecimal amount, Currency currency, RoundingMode roundingStyle) {
         this.amount = amount.setScale(DEFAULT_SCALE, DEFAULT_ROUNDING);
         this.currency = currency;
         this.rounding = roundingStyle;
         validateState();
     }
 
-    public Money(BigDecimal amount){
+    public Money(BigDecimal amount) {
         this(amount, DEFAULT_CURRENCY, DEFAULT_ROUNDING);
     }
 
-    public Money(BigDecimal amount, Currency currency){
+    public Money(BigDecimal amount, Currency currency) {
         this(amount, currency, DEFAULT_ROUNDING);
     }
 
-    public BigDecimal getAmount() { return amount; }
+    public BigDecimal getAmount() {
+        return amount;
+    }
 
-    public Currency getCurrency() { return currency; }
+    public Currency getCurrency() {
+        return currency;
+    }
 
-    public RoundingMode getRoundingStyle() { return rounding; }
+    public RoundingMode getRoundingStyle() {
+        return rounding;
+    }
 
-    public boolean isSameCurrencyAs(Money that){
+    public boolean isSameCurrencyAs(Money that) {
         boolean result = false;
-        if ( that != null ) {
+        if (that != null) {
             result = this.currency.equals(that.currency);
         }
         return result;
     }
 
-    public Money plus(Money that){
+    public Money plus(Money that) {
         checkCurrenciesMatch(that);
         return new Money(amount.add(that.amount), currency, rounding);
     }
 
-    public Money minus(Money that){
+    public Money minus(Money that) {
         checkCurrenciesMatch(that);
         return new Money(amount.subtract(that.amount), currency, rounding);
     }
 
-    public static Money sum(Collection<Money> moneys, Currency currencyIfEmpty){
+    public static Money sum(Collection<Money> moneys, Currency currencyIfEmpty) {
         Money sum = new Money(ZERO, currencyIfEmpty);
-        for(Money money : moneys){
+        for (Money money : moneys) {
             sum = sum.plus(money);
         }
         return sum;
     }
 
-    public Money times(int aFactor){
+    public Money times(int aFactor) {
         BigDecimal factor = new BigDecimal(aFactor);
         BigDecimal newAmount = amount.multiply(factor);
         return new Money(newAmount, currency, rounding);
     }
 
-    public Money times(double factor){
+    public Money times(double factor) {
         BigDecimal newAmount = amount.multiply(asBigDecimal(factor));
         newAmount = newAmount.setScale(getNumDecimalsForCurrency(), rounding);
-        return  new Money(newAmount, currency, rounding);
+        return new Money(newAmount, currency, rounding);
     }
 
     public boolean gt(Money that) {
@@ -84,43 +92,43 @@ public final class Money implements Comparable<Money>, Serializable {
         return compareAmount(that) >= 0;
     }
 
-    public String toString(){
+    public String toString() {
         return amount.toPlainString() + " " + currency.getSymbol();
     }
 
-    public boolean equals(Object aThat){
+    public boolean equals(Object aThat) {
         if (this == aThat) return true;
-        if (! (aThat instanceof Money) ) return false;
-        Money that = (Money)aThat;
-        for(int i = 0; i < this.getSigFields().length; ++i){
-            if (!Objects.equals(this.getSigFields()[i], that.getSigFields()[i])){
+        if (!(aThat instanceof Money)) return false;
+        Money that = (Money) aThat;
+        for (int i = 0; i < this.getSigFields().length; ++i) {
+            if (!Objects.equals(this.getSigFields()[i], that.getSigFields()[i])) {
                 return false;
             }
         }
         return true;
     }
 
-    public int hashCode(){
+    public int hashCode() {
         return Objects.hash(getSigFields());
     }
 
     public int compareTo(Money that) {
         final int EQUAL = 0;
 
-        if ( this == that ) return EQUAL;
+        if (this == that) return EQUAL;
 
         //the object fields are never null
         int comparison = this.amount.compareTo(that.amount);
-        if ( comparison != EQUAL ) return comparison;
+        if (comparison != EQUAL) return comparison;
 
         comparison = this.currency.getCurrencyCode().compareTo(
                 that.currency.getCurrencyCode()
         );
-        if ( comparison != EQUAL ) return comparison;
+        if (comparison != EQUAL) return comparison;
 
 
         comparison = this.rounding.compareTo(that.rounding);
-        if ( comparison != EQUAL ) return comparison;
+        if (comparison != EQUAL) return comparison;
 
         return EQUAL;
     }
@@ -138,7 +146,7 @@ public final class Money implements Comparable<Money>, Serializable {
     private final static int DEFAULT_SCALE = 2;
 
     private Object[] getSigFields() {
-        return new Object[] {amount, currency, rounding};
+        return new Object[]{amount, currency, rounding};
     }
 
     private void writeObject(ObjectOutputStream outputStream) throws IOException {
@@ -146,14 +154,14 @@ public final class Money implements Comparable<Money>, Serializable {
         outputStream.defaultWriteObject();
     }
 
-    private void validateState(){
-        if( amount == null ) {
+    private void validateState() {
+        if (amount == null) {
             throw new IllegalArgumentException("Amount cannot be null");
         }
-        if( currency == null ) {
+        if (currency == null) {
             throw new IllegalArgumentException("Currency cannot be null");
         }
-        if ( amount.scale() > getNumDecimalsForCurrency() ) {
+        if (amount.scale() > getNumDecimalsForCurrency()) {
             throw new IllegalArgumentException(
                     "Number of decimals is " + amount.scale() + ", but currency only takes " +
                             getNumDecimalsForCurrency() + " decimals."
@@ -161,23 +169,23 @@ public final class Money implements Comparable<Money>, Serializable {
         }
     }
 
-    private int getNumDecimalsForCurrency(){
+    private int getNumDecimalsForCurrency() {
         return currency.getDefaultFractionDigits();
     }
 
-    private void checkCurrenciesMatch(Money aThat){
-        if (! this.currency.equals(aThat.getCurrency())) {
+    private void checkCurrenciesMatch(Money aThat) {
+        if (!this.currency.equals(aThat.getCurrency())) {
             throw new MismatchedCurrencyException(
                     aThat.getCurrency() + " doesn't match the expected currency : " + currency
             );
         }
     }
 
-    private int compareAmount(Money aThat){
+    private int compareAmount(Money aThat) {
         return this.amount.compareTo(aThat.amount);
     }
 
-    private BigDecimal asBigDecimal(double aDouble){
+    private BigDecimal asBigDecimal(double aDouble) {
         String asString = Double.toString(aDouble);
         return new BigDecimal(asString);
     }

@@ -10,8 +10,7 @@ public class PolicyObjectBuilder {
         this.policySubObjects = BuildPolicySubObjects();
     }
 
-    public PolicyObjectBuilder withPolicySubObjects(PolicySubObject[] policySubObjects)
-    {
+    public PolicyObjectBuilder withPolicySubObjects(PolicySubObject[] policySubObjects) {
         this.policySubObjects = policySubObjects;
         return this;
     }

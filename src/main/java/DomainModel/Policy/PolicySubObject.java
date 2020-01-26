@@ -1,18 +1,17 @@
 package DomainModel.Policy;
 
 import DomainModel.Money;
+import DomainModel.Policy.Risks.Risk;
 
 public class PolicySubObject {
-    public static String RISK_TYPE_WATER = "WATER";
-    public static String RISK_TYPE_FIRE = "FIRE";
     private String name;
     private Money sum;
-    private String[] riskTypes;
+    private Risk[] risks;
 
-    public PolicySubObject(String name, Money sum, String[] riskTypes) {
+    public PolicySubObject(String name, Money sum, Risk[] risks) {
         this.name = name;
         this.sum = sum;
-        this.riskTypes = riskTypes;
+        this.risks = risks;
     }
 
     public String getName() {
@@ -23,7 +22,7 @@ public class PolicySubObject {
         return sum;
     }
 
-    public String[] getRiskTypes() {
-        return riskTypes;
+    public Risk[] getRisks() {
+        return risks;
     }
 }

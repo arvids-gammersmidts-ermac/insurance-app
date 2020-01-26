@@ -15,31 +15,26 @@ public class PolicyBuilder {
         this.policyObjects = BuildPolicyObjects();
     }
 
-    public Policy Build()
-    {
+    public Policy Build() {
         return new Policy(this.number, this.status, this.policyObjects);
     }
 
-    public PolicyBuilder withNumber(String number)
-    {
+    public PolicyBuilder withNumber(String number) {
         this.number = number;
         return this;
     }
 
-    public PolicyBuilder withStatus(String status)
-    {
+    public PolicyBuilder withStatus(String status) {
         this.status = status;
         return this;
     }
 
-    public PolicyBuilder withPolicyObjects(PolicyObject[] policyObjects)
-    {
+    public PolicyBuilder withPolicyObjects(PolicyObject[] policyObjects) {
         this.policyObjects = policyObjects;
         return this;
     }
 
-    private PolicyObject[] BuildPolicyObjects()
-    {
+    private PolicyObject[] BuildPolicyObjects() {
         return new PolicyObject[]{
                 this.policyObjectBuilder.BuildFlat(),
                 this.policyObjectBuilder.BuildHouse(),
