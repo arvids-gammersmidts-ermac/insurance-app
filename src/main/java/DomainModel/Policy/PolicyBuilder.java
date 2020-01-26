@@ -13,7 +13,7 @@ public class PolicyBuilder {
         this.policyObjects = BuildPolicyObjects();
     }
 
-    public Policy Build() {
+    public Policy build() {
         return new Policy(this.number, this.policyObjects);
     }
 
@@ -29,8 +29,8 @@ public class PolicyBuilder {
 
     private PolicyObject[] BuildPolicyObjects() {
         return new PolicyObject[]{
-                this.policyObjectBuilder.BuildFlat(),
-                this.policyObjectBuilder.BuildHouse(),
+                this.policyObjectBuilder.buildFlat(),
+                this.policyObjectBuilder.buildHouse(),
         };
     }
 }

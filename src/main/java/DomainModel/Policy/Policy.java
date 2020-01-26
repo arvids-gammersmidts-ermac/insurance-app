@@ -9,10 +9,12 @@ import java.util.List;
 
 public class Policy {
     private PolicyNumber number;
+
     private enum Statuses {
         APPROVED,
         REGISTERED
     }
+
     private Statuses status = Statuses.REGISTERED;
     private PolicyObject[] objects;
     private Money premium;
@@ -30,8 +32,7 @@ public class Policy {
         return status;
     }
 
-    public Policy approve()
-    {
+    public Policy approve() {
         this.status = Statuses.APPROVED;
         return this;
     }

@@ -18,18 +18,18 @@ public class PolicySubObjectBuilder {
         this.risks = new Risk[]{new FireRisk(), new WaterRisk()};
     }
 
-    public PolicySubObject Build() {
+    public PolicySubObject build() {
         return new PolicySubObject(this.name, this.sum, this.risks);
     }
 
-    public PolicySubObject BuildTV() {
+    public PolicySubObject buildTV() {
         this.name = "TV";
         this.sum = new Money(new BigDecimal(110.00));
         this.risks = new Risk[]{new FireRisk(), new WaterRisk()};
         return new PolicySubObject(this.name, this.sum, this.risks);
     }
 
-    public PolicySubObject BuildPainting() {
+    public PolicySubObject buildPainting() {
         this.name = "Painting";
         this.sum = new Money(new BigDecimal(1001.11));
         this.risks = new Risk[]{new FireRisk()};

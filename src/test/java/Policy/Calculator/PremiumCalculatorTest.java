@@ -17,7 +17,7 @@ public class PremiumCalculatorTest {
     @Test
     public void test() {
         PremiumCalculator premiumCalculator = new PremiumCalculator(new DefaultPremiumCalculatorStrategy());
-        Policy policy = this.policyBuilder.Build();
+        Policy policy = this.policyBuilder.build();
 
         assertEquals(new Money(new BigDecimal(62.11)).getAmount(), premiumCalculator.calculate(policy).getAmount());
     }

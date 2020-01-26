@@ -7,7 +7,7 @@ public class PolicyObjectBuilder {
 
     public PolicyObjectBuilder() {
         this.name = "PolicyObject";
-        this.policySubObjects = BuildPolicySubObjects();
+        this.policySubObjects = buildPolicySubObjects();
     }
 
     public PolicyObjectBuilder withPolicySubObjects(PolicySubObject[] policySubObjects) {
@@ -15,40 +15,40 @@ public class PolicyObjectBuilder {
         return this;
     }
 
-    public PolicyObject Build() {
+    public PolicyObject build() {
         return new PolicyObject(this.name, this.policySubObjects);
     }
 
-    public PolicyObject BuildHouse() {
+    public PolicyObject buildHouse() {
         this.name = "House";
-        this.policySubObjects = BuildHousePolicySubObjects();
+        this.policySubObjects = buildHousePolicySubObjects();
         return new PolicyObject(this.name, this.policySubObjects);
     }
 
-    public PolicyObject BuildFlat() {
+    public PolicyObject buildFlat() {
         this.name = "House";
-        this.policySubObjects = BuildFlatPolicySubObjects();
+        this.policySubObjects = buildFlatPolicySubObjects();
         return new PolicyObject(this.name, this.policySubObjects);
     }
 
-    private PolicySubObject[] BuildPolicySubObjects() {
+    private PolicySubObject[] buildPolicySubObjects() {
         return new PolicySubObject[]{
-                this.policySubObjectBuilder.BuildTV(),
-                this.policySubObjectBuilder.BuildPainting(),
+                this.policySubObjectBuilder.buildTV(),
+                this.policySubObjectBuilder.buildPainting(),
         };
     }
 
-    private PolicySubObject[] BuildHousePolicySubObjects() {
+    private PolicySubObject[] buildHousePolicySubObjects() {
         return new PolicySubObject[]{
-                this.policySubObjectBuilder.BuildTV(),
-                this.policySubObjectBuilder.BuildPainting(),
+                this.policySubObjectBuilder.buildTV(),
+                this.policySubObjectBuilder.buildPainting(),
         };
     }
 
-    private PolicySubObject[] BuildFlatPolicySubObjects() {
+    private PolicySubObject[] buildFlatPolicySubObjects() {
         return new PolicySubObject[]{
-                this.policySubObjectBuilder.BuildTV(),
-                this.policySubObjectBuilder.BuildPainting(),
+                this.policySubObjectBuilder.buildTV(),
+                this.policySubObjectBuilder.buildPainting(),
         };
     }
 }
